@@ -2,16 +2,13 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Menu, X, Sun, Moon, User, LogIn } from "lucide-react"
-import { useTheme } from "next-themes"
-
+import { Menu, X, User, LogIn } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const { setTheme } = useTheme()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -26,9 +23,6 @@ export function Navbar() {
             </Link>
             <Link href="#" className="text-sm font-medium transition-colors hover:text-primary">
               Destinations
-            </Link>
-            <Link href="#" className="text-sm font-medium transition-colors hover:text-primary">
-              Features
             </Link>
             <Link href="#" className="text-sm font-medium transition-colors hover:text-primary">
               Community
