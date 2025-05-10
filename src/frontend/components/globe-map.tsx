@@ -69,104 +69,11 @@ export function GlobeMap({ isLoggedIn = false }: { isLoggedIn?: boolean }) {
   return (
     <div className="w-full bg-background">
       <div className="flex flex-col lg:flex-row">
-        {/* Left sidebar - User profile and trips */}
-        <div className="w-full lg:w-1/4 border-r">
-          {isLoggedIn ? (
-            <>
-              {/* User profile */}
-              <div className="p-6 flex flex-col items-center border-b">
-                <div className="relative h-16 w-16 rounded-full overflow-hidden mb-4">
-                  <Image
-                    src={mockUser.avatar || "/placeholder.svg"}
-                    alt={mockUser.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <h3 className="text-lg font-bold">{mockUser.name} 🇩🇪</h3>
-
-                <div className="flex w-full justify-between mt-4 text-center">
-                  <div>
-                    <div className="text-xl font-bold">{mockUser.countries}</div>
-                    <div className="text-xs text-muted-foreground">Countries</div>
-                  </div>
-                  <div>
-                    <div className="text-xl font-bold">{mockUser.followers}</div>
-                    <div className="text-xs text-muted-foreground">Followers</div>
-                  </div>
-                  <div>
-                    <div className="text-xl font-bold">{mockUser.following}</div>
-                    <div className="text-xs text-muted-foreground">Following</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tabs */}
-              <div className="flex border-b">
-                <button
-                  className={`flex-1 py-3 text-center font-medium ${activeTab === "trips" ? "border-b-2 border-primary" : ""}`}
-                  onClick={() => setActiveTab("trips")}
-                >
-                  Trips
-                </button>
-                <button
-                  className={`flex-1 py-3 text-center font-medium ${activeTab === "statistics" ? "border-b-2 border-primary" : ""}`}
-                  onClick={() => setActiveTab("statistics")}
-                >
-                  Statistics
-                </button>
-              </div>
-
-              {/* Add trip button */}
-              <div className="p-4">
-                <Button className="w-full">Add a past, current or future trip</Button>
-              </div>
-
-              {/* Trip list */}
-              <div className="overflow-auto max-h-[calc(100vh-400px)]">
-                {mockUser.trips.map((trip) => (
-                  <Card key={trip.id} className="m-4 overflow-hidden border">
-                    <div className="relative h-40">
-                      <Image src={trip.imageUrl || "/placeholder.svg"} alt={trip.title} fill className="object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-4">
-                        <h3 className="text-xl font-bold text-white">{trip.title}</h3>
-                      </div>
-                    </div>
-                    <CardContent className="p-4">
-                      <div className="flex justify-between items-center">
-                        <div className="text-sm font-medium">{trip.date}</div>
-                        <div className="flex gap-4">
-                          <div className="text-center">
-                            <div className="font-bold">{trip.days}</div>
-                            <div className="text-xs text-muted-foreground">DAYS</div>
-                          </div>
-                          <div className="text-center">
-                            <div className="font-bold">{trip.kilometers}</div>
-                            <div className="text-xs text-muted-foreground">KILOMETERS</div>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </>
-          ) : (
-            <div className="p-6 flex flex-col items-center justify-center h-full">
-              <h3 className="text-xl font-bold mb-4">Track Your Travels</h3>
-              <p className="text-center text-muted-foreground mb-6">
-                Sign in to track your journeys, save memories, and share your adventures.
-              </p>
-              <Button>Sign In</Button>
-            </div>
-          )}
-        </div>
-
-        {/* Right side - Map */}
-        <div className="w-full lg:w-3/4 h-[600px] lg:h-[calc(100vh-64px)] relative">
+        {/* Map */}
+        <div className="w-full h-[600px] lg:h-[calc(100vh-64px)] relative">
           {/* For demonstration, we'll use an image of the map */}
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/landing-page-for-corneliu.png-MDzieaRPnQF3MWfO2CJxSfamCYNiqj.jpeg"
+            src="/landing-page-for-corneliu.png.jpeg"
             alt="Travel map"
             fill
             className="object-cover"
@@ -186,17 +93,6 @@ export function GlobeMap({ isLoggedIn = false }: { isLoggedIn?: boolean }) {
                 </div>
               </div>
             </>
-          )}
-
-          {/* Overlay for non-logged in users */}
-          {!isLoggedIn && (
-            <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-              <div className="bg-white/90 p-6 rounded-lg max-w-md text-center">
-                <h3 className="text-xl font-bold mb-2">Explore the World</h3>
-                <p className="mb-4">Sign in to see your travel history and plan new adventures.</p>
-                <Button>Get Started</Button>
-              </div>
-            </div>
           )}
         </div>
       </div>

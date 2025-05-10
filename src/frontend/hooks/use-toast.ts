@@ -1,3 +1,10 @@
+/**
+ * A React hook for managing toast notifications with a global state.
+ * Toast notifications are temporary messages that appear on screen to provide feedback
+ * to users about actions they've taken or system events. They typically appear briefly
+ * and then automatically disappear.
+ */
+
 "use client"
 
 // Inspired by react-hot-toast library

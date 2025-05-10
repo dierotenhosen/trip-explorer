@@ -1,3 +1,7 @@
+/**
+ * A React hook that detects if the current viewport is mobile-sized
+ * based on the value of 768px
+ */
 import * as React from "react"
 
 const MOBILE_BREAKPOINT = 768
