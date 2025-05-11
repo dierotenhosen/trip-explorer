@@ -30,3 +30,7 @@ A Next.js project for exploring trips.
 - **Frontend:** Next.js, React, TypeScript
 - **Styling:** Tailwind CSS
 - **Package Manager:** pnpm
+
+## To be run on Synology DS220+
+* Available: node.js, php, mariadb, apache http server. 
+* Support for the following needs to be checked: python? java?, docker?
