@@ -28,9 +28,11 @@ export default function Home() {
               <Button size="lg" onClick={() => setIsLoggedIn(!isLoggedIn)}>
                 {isLoggedIn ? "View as Guest" : "Sign In"}
               </Button>
-              <Button size="lg" variant="outline">
-                Learn More
-              </Button>
+              <Link href="/explore">
+                <Button size="lg" variant="outline">
+                  Explore Trips
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -91,7 +93,7 @@ export default function Home() {
               <h2 className="text-xl font-bold">Travelogue</h2>
             </div>
             <nav className="flex gap-6">
-              <Link href="#" className="text-sm hover:underline">
+              <Link href="/explore" className="text-sm hover:underline">
                 Explore
               </Link>
               <Link href="#" className="text-sm hover:underline">

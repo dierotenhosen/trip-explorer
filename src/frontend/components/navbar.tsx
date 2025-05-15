@@ -18,7 +18,7 @@ export function Navbar() {
             <span className="text-xl font-bold">Travelogue</span>
           </Link>
           <nav className="hidden md:flex md:gap-6">
-            <Link href="#" className="text-sm font-medium transition-colors hover:text-primary">
+            <Link href="/explore" className="text-sm font-medium transition-colors hover:text-primary">
               Explore
             </Link>
             <Link href="#" className="text-sm font-medium transition-colors hover:text-primary">
@@ -62,7 +62,7 @@ export function Navbar() {
         <div className="container pb-4 md:hidden">
           <nav className="flex flex-col space-y-3">
             <Link
-              href="#"
+              href="/explore"
               className="flex items-center rounded-md px-2 py-1 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
               onClick={() => setIsMenuOpen(false)}
             >

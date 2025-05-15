@@ -32,5 +32,5 @@ A Next.js project for exploring trips.
 - **Package Manager:** pnpm
 
 ## To be run on Synology DS220+
-* Available: node.js, php, mariadb, apache http server. 
-* Support for the following needs to be checked: python? java?, docker?
+* Available: node.js, php, python, mariadb, apache http server. 
+* Support via Docker: java.
