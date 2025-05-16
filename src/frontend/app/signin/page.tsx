@@ -1,6 +1,3 @@
-"use client";
-
-import { useSearchParams } from "next/navigation";
 import { SignInForm } from "@/components/auth/SignInForm";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CheckCircle2 } from "lucide-react";
@@ -10,9 +7,12 @@ export const metadata = {
   description: "Sign in to your Travelogue account to manage your trips and experiences.",
 };
 
-export default function SignInPage() {
-  const searchParams = useSearchParams();
-  const registered = searchParams.get("registered") === "true";
+export default function SignInPage({
+  searchParams,
+}: {
+  searchParams: { registered?: string };
+}) {
+  const registered = searchParams.registered === "true";
 
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center py-12">
