@@ -5,10 +5,22 @@ import Link from "next/link"
 import { Menu, X, User, LogIn } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { useAuth } from "@/contexts/AuthContext"
+import { useRouter } from "next/navigation"
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const { user, signOut } = useAuth()
+  const router = useRouter()
+  
+  const handleSignOut = async () => {
+    try {
+      await signOut()
+      router.push("/")
+    } catch (error) {
+      console.error("Failed to sign out:", error)
+    }
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -31,7 +43,7 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
-          {isLoggedIn ? (
+          {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="rounded-full">
@@ -39,17 +51,19 @@ export function Navbar() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>My Trips</DropdownMenuItem>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setIsLoggedIn(false)}>Sign Out</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/dashboard")}>Dashboard</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/dashboard")}>My Trips</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => router.push("/dashboard")}>Settings</DropdownMenuItem>
+                <DropdownMenuItem onClick={handleSignOut}>Sign Out</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button onClick={() => setIsLoggedIn(true)} className="hidden md:flex">
-              <LogIn className="mr-2 h-4 w-4" />
-              Sign In
-            </Button>
+            <Link href="/signin">
+              <Button className="hidden md:flex">
+                <LogIn className="mr-2 h-4 w-4" />
+                Sign In
+              </Button>
+            </Link>
           )}
 
           <Button variant="outline" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden">
@@ -90,9 +104,17 @@ export function Navbar() {
               Community
             </Link>
             <div className="pt-2">
-              <Button className="w-full" onClick={() => setIsLoggedIn(true)}>
-                {isLoggedIn ? "Sign Out" : "Sign In"}
-              </Button>
+              {user ? (
+                <Button className="w-full" onClick={handleSignOut}>
+                  Sign Out
+                </Button>
+              ) : (
+                <Link href="/signin" className="w-full" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="w-full">
+                    Sign In
+                  </Button>
+                </Link>
+              )}
             </div>
           </nav>
         </div>
