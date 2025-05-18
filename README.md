@@ -27,9 +27,13 @@ A Next.js project for exploring trips.
 
 ## Technology Stack
 
-- **Frontend:** Next.js, React, TypeScript
+- **Frontend:** Next.js, React, TypeScript, Firebase
 - **Styling:** Tailwind CSS
 - **Package Manager:** pnpm
+
+## Firebase Configuration
+
+* Go to [https://console.firebase.google.com/](https://console.firebase.google.com/) to check or update the Firebase Configuration.
 
 ## To be run on Synology DS220+
 * Available: node.js, php, python, mariadb, apache http server. 

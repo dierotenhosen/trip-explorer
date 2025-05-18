@@ -25,9 +25,13 @@ export default function Home() {
               Share Your Experiences
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" onClick={() => setIsLoggedIn(!isLoggedIn)}>
-                {isLoggedIn ? "View as Guest" : "Sign In"}
-              </Button>
+              {!isLoggedIn && (
+                <Link href="/signin">
+                  <Button size="lg">
+                    Sign In
+                  </Button>
+                </Link>
+              )}
               <Link href="/explore">
                 <Button size="lg" variant="outline">
                   Explore Trips

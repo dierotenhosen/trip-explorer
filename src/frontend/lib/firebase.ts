@@ -9,8 +9,7 @@ const firebaseConfig = {
     projectId: "trip-explorer-119a3",
     storageBucket: "trip-explorer-119a3.firebasestorage.app",
     messagingSenderId: "1006093158026",
-    appId: "1:1006093158026:web:8babd48d29644e3707cf73",
-    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+    appId: "1:1006093158026:web:8babd48d29644e3707cf73"
 };
 
 // Initialize Firebase
