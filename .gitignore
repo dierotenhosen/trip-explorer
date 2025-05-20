@@ -6,3 +6,6 @@ next-env.d.ts
 # Python
 venv/
 __pycache__/
+
+# Environment variables
+.env

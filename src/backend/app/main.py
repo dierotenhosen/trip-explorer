@@ -1,8 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 import os
+from sqlalchemy.orm import Session
+## ------------------------------------------------------------
+from database import get_db
+from models import User, Trip, TripDestination
+## ------------------------------------------------------------
 
 app = FastAPI(title="Trip Explorer API")
 
@@ -22,13 +27,21 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 async def root():
     return {"message": "Welcome to Trip Explorer API"}
 
-@app.get("/health")
-def health_check():
-    return {"status": "ok"}
-
 @app.get("/favicon.ico")
 async def favicon():
     return FileResponse(os.path.join("static", "favicon.ico"))
+
+@app.get("/health")
+def health_check(db: Session = Depends(get_db)):
+    users_count = db.query(User).count()
+    trips_count = db.query(Trip).count()
+    destinations_count = db.query(TripDestination).count()
+    return {
+        "status": "ok",
+        "users": users_count,
+        "trips": trips_count,
+        "trip_destinations": destinations_count
+    }
 
 if __name__ == "__main__":
     import uvicorn
