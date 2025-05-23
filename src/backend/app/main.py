@@ -4,10 +4,8 @@ from fastapi.staticfiles import StaticFiles
 import uvicorn
 # ------------------------------------------------------------
 from api import create_api
-# ------------------------------------------------------------
 
 app = FastAPI(title="Trip Explorer API")
-
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
@@ -16,8 +14,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Serve static files (including favicon)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 create_api(app)
 

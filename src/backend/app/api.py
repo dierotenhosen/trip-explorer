@@ -9,7 +9,6 @@ from typing import Optional
 # ------------------------------------------------------------
 from database import get_db
 from models import User, Trip, TripDestination
-# ------------------------------------------------------------
 
 async def root():
     return {"message": "Welcome to Trip Explorer API"}
@@ -30,6 +29,8 @@ async def health_check(db: Session = Depends(get_db)):
         "trips": trips_count,
         "trip_destinations": destinations_count
     }
+
+# add code to handle CRUD operations for the Trip model.
 
 class TripCreate(BaseModel):
     name: str
@@ -71,7 +72,6 @@ async def create_trip(trip: TripCreate, db: Session = Depends(get_db)):
         "updated_at": new_trip.updated_at
     }
 
-
 async def read_trip(trip_id: int, db: Session = Depends(get_db)):
     """
     Retrieve a trip by its ID.
@@ -103,6 +103,9 @@ async def delete_trip(trip_id: int, db: Session = Depends(get_db)):
     db.commit()
     
     return {"detail": "Trip deleted successfully"}
+
+# Todo: add code to handle CRUD operations for the User model.
+# Todo: add code to handle CRUD operations for the TripDestination model.
 
 def create_api(app: FastAPI):
     app.add_api_route("/", root, methods=["GET"])
