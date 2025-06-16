@@ -4,3 +4,4 @@ pymysql
 python-dotenv
 sqlalchemy
 uvicorn
+firebase-admin

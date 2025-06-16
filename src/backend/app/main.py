@@ -5,7 +5,12 @@ import uvicorn
 # ------------------------------------------------------------
 from api import create_api
 
-app = FastAPI(title="Trip Explorer API")
+app = FastAPI(
+    title="Trip Explorer API",
+    description="API for managing trips with Firebase authentication",
+    version="1.0.0"
+)
+
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
@@ -13,7 +18,9 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 create_api(app)
 

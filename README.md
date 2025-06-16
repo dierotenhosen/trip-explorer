@@ -33,6 +33,15 @@ A project for exploring trips.
    cd ../../..
    ```
 
+5. Configure Firebase Authentication:
+   
+   **Option 1: Service Account (Recommended for production)**
+   - Download your Firebase service account key from Firebase Console and set environment variable: `GOOGLE_APPLICATION_CREDENTIALS=path/to/serviceAccountKey.json`
+   
+   **Option 2: Application Default Credentials (Development)**
+   - Set `FIREBASE_PROJECT_ID=your-project-id` in environment
+   - Or install Google Cloud CLI and run: `gcloud auth application-default login`
+
 ## Running Locally
 
 1. Start the development server and the Uvicorn server:
@@ -45,10 +54,33 @@ A project for exploring trips.
 
 3. Open your browser and go to [http://localhost:3000](http://localhost:3000).
 
+4. API Documentation: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+## API Authentication
+
+All trip and user endpoints now require Firebase authentication. Include the Firebase ID token in the Authorization header:
+
+```
+Authorization: Bearer <firebase-id-token>
+```
+
+### Available Endpoints:
+
+**Trips (Authenticated)**
+- `POST /trips/` - Create a new trip
+- `GET /trips/` - Get all trips for authenticated user
+- `GET /trips/{trip_id}` - Get specific trip (if owned by user)
+- `PUT /trips/{trip_id}` - Update trip (if owned by user)
+- `DELETE /trips/{trip_id}` - Delete trip (if owned by user)
+
+**Public Endpoints**
+- `GET /` - Root message
+- `GET /health` - Health check
+
 ## Technology Stack
 
 - **Frontend:** Next.js, React, TypeScript, Firebase, Tailwind CSS
-- **Backend:** Python, FastAPI, Uvicorn
+- **Backend:** Python, FastAPI, Uvicorn, Firebase Admin SDK
 - **Package Manager:** pnpm, pip
 
 - Note: Trip-explorer will be deployed on a Synology DS220+ that has node.js, python, mariadb.
@@ -92,6 +124,6 @@ mysql -u <username> -p trip_explorer < seed.sql
 
 ## Tasks
 Suggested Steps for #11:
-1. Define the API Endpoints and implement CRUD Logic: Use the FastAPI router to define endpoints for updating, and deleting trips. Use SQLAlchemy to interact with the database for each endpoint. Ensure that the endpoints handle validation and error responses appropriately.
+1. Done (Implement API endpoints.)
 2. Test the Endpoints: Use tools like Postman or curl to test the API endpoints. Write unit tests for the API functions.
 3. Document the API: Update your API documentation to include the new endpoints and their usage.
