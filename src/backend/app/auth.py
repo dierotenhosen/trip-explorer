@@ -67,8 +67,15 @@ async def get_current_user(
             detail="Invalid token: missing user ID"
         )
     
-    # Try to find existing user
+    # Try to find existing user by firebase_uid, then by email
     user = db.query(User).filter(User.firebase_uid == firebase_uid).first()
+    if not user and email:
+        user = db.query(User).filter(User.email == email).first()
+        if user:
+            # Update the existing record with the new Firebase UID
+            user.firebase_uid = firebase_uid
+            db.commit()
+            db.refresh(user)
     
     # Create user if doesn't exist
     if not user:

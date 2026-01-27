@@ -1,3 +1,17 @@
+-- WARNING: This seed file contains TEST/DEVELOPMENT data only.
+-- The firebase_uid values here are PLACEHOLDERS and will NOT match real Firebase users.
+-- Real users are automatically created in the database when they first authenticate via Firebase.
+-- 
+-- This seed data is useful for:
+-- - Testing the database schema and relationships
+-- - Development/testing scenarios where you need sample data
+-- - Manual testing of trip queries without Firebase authentication
+--
+-- For production or real user scenarios:
+-- - Users will be created automatically on first Firebase authentication
+-- - Trips should be created via the API after users authenticate
+-- - Do NOT use this seed file in production environments
+
 INSERT INTO users (firebase_uid, email, display_name) VALUES
 ('uid_123', 'popeea.corneliu@gmail.com', 'Corneliu'),
 ('uid_456', 'cati@example.com', 'Cati');

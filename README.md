@@ -94,36 +94,28 @@ Authorization: Bearer <firebase-id-token>
 
 ## Database Setup
 
-### Create the schema
+### Create the database and the schema
 ```sh
-mysql -u <username> -p trip_explorer < schema.sql
+mysql -u root < db/init-user-and-db.sql
+mysql -u <username> -p trip_explorer < db/migrations/001_init_schema.sql
 ```
 
-### Seed with test data
-```sh
-mysql -u <username> -p trip_explorer < seed.sql
-```
+### Seed with test data (TEST/DEVELOPMENT ONLY)
+- The `firebase_uid` values in the seed file are **placeholders** and will **NOT match real Firebase users**
+- Real users are automatically created in the database when they first authenticate via Firebase
+- This seed data is useful for testing the database schema and relationships during development
 
-## Models in Cursor
-| Model Name                       | Provider        | Description                                        | Cost per Request | Notes                                            |
-| -------------------------------- | --------------- | -------------------------------------------------- | ---------------- | ------------------------------------------------ |
-| **Cursor Small**                 | Cursor Team     | Lightweight, fast model for coding                 | Free             | Ideal for autocomplete and local tasks           |
-| **GPT-4o Mini**                  | OpenAI          | Lightweight version of GPT-4o                      | Free             | 500 requests/day on free plan                    |
-| -------------------------------- | --------------- | -------------------------------------------------- | ---------------- | ------------------------------------------------ |
-| **Claude 4.0 Sonnet**            | Anthropic       | Balanced Claude model                              | \$0.04           | Good for general use; premium model              |
-| **Claude 4.0 Sonnet (thinking)** | Anthropic       | Claude 4.0 with long context/thinking enhancements | \$0.04           | Suitable for long context and in-depth reasoning |
-| **Cursor Fast**                  | Cursor Team     | Optimized for code understanding and suggestions   | \$0.04           | Premium; fast and efficient                      |
-| **GPT-4**                        | OpenAI          | Advanced general-purpose model                     | \$0.04           | Premium model; counts as 1 fast request          |
-| **GPT-4 Turbo**                  | OpenAI          | Optimized version of GPT-4                         | \$0.04           | Premium model; counts as 1 fast request          |
-| **GPT-4o**                       | OpenAI          | High-performance model with multimodal support     | \$0.04           | Premium model; counts as 1 fast request          |
-| **o4 Mini**                      | OpenAI          | Latest mini model with updated capabilities        | \$0.04           | Premium model; counts as 1 fast request          |
-| -------------------------------- | --------------- | -------------------------------------------------- | ---------------- | ------------------------------------------------ |
-| **o1 Mini**                      | OpenAI          | Smaller variant of o1                              | \$0.10           | 10 requests/day included on paid plans           |
-| **o1**                           | OpenAI          | Reasoning-focused model                            | \$0.40           | Premium; complex problem-solving                 |
-| **Claude 4.0 Opus**              | Anthropic       | World's best coding model                          | $15/75 MTokens   | leading SWE-bench performance (72.5%)            |
+```sh
+mysql -u <username> -p trip_explorer < db/seed.sql
+```
 
 ## Tasks
-Suggested Steps for #11:
+Next Steps for #11:
 1. Done (Implement API endpoints.)
-2. Test the Endpoints: Use tools like Postman or curl to test the API endpoints. Write unit tests for the API functions.
-3. Document the API: Update your API documentation to include the new endpoints and their usage.
+2. Done (Test the Endpoints with Postman.)
+3. Write unit tests for the API functions.
+get /trips
+post /trips
+get /trips/{trip_id}
+put /trips/{trip_id}
+delete /trips/{trip_id}
